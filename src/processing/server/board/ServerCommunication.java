@@ -55,7 +55,7 @@ public class ServerCommunication implements IServerCommunication{
 		 * 
 		 * We are sending username and the client full address
 		 */
-		String message = ClientBoardState.username.toString()
+		String message = ClientBoardState.userId.toString()
 					   + ":"
 					   + ClientBoardState.userIP.toString()
 					   + ":"

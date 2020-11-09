@@ -64,13 +64,13 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 		ObjectHandler.handleBoardObject(message);
 		
 		// get the username of the user who created the object
-		Username objectUser = obj.getUserId().getUsername();
+		UserId objectUser = obj.getUserId();
 		
 		/**
 		 * Send the same message to all the clients except for the client who sent it
 		 * for broadcasting.
 		 */
-		for(Map.Entry<Username, IpAddress> user : ClientBoardState.users.entrySet()) {
+		for(Map.Entry<UserId, IpAddress> user : ClientBoardState.users.entrySet()) {
 			
 			// check if the user is not the same who sent the object
 			if(!user.getKey().equals(objectUser)) {

@@ -20,7 +20,7 @@ public class UserId {
 	 * @param ipAddress 
 	 * @param timestamp Time at which this object was built
 	 */
-	public UserId(String ipAddress, Username username) {
+	public UserId(IpAddress ipAddress, Username username) {
 		userId = ipAddress + "_" + username.toString();
 	}
 	
