@@ -47,11 +47,11 @@ public interface IDrawShapes {
 	void drawLine(Pixel start, Pixel end); 
 	
 	/**
-     * Constructs a Triangle based on the three vertices provided
-     * 
-     * @param vertA First vertex of the triangle
-     * @param vertB Second vertex of the triangle
-     * @param vertC Third vertex of the triangle
+	 * Constructs a Triangle based on the three vertices provided
+	 * 
+	 * @param vertA First vertex of the triangle
+	 * @param vertB Second vertex of the triangle
+	 * @param vertC Third vertex of the triangle
 	 */
 	void drawTriangle(Pixel vertA, Pixel vertB, Pixel vertC); 
 }
