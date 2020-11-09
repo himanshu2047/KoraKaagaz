@@ -60,7 +60,15 @@ public class BoardServer {
 		ClientBoardState.serverPort = serverPort;
 		
 		//set the user IP using the networking module getIP() function
-		ClientBoardState.userIP = new IpAddress(CommunicatorFactory.getClientInfo().getIp());
+		try {
+			ClientBoardState.userIP = new IpAddress(CommunicatorFactory.getClientInfo().getIp());
+		} catch (Exception e) {
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"Error while getting IP Address from network module in the BoardServer"
+			);
+		}
 		
 		/**
 		 * While starting a new Board Server, the Board ID is given as the second argument

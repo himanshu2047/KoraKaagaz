@@ -37,6 +37,7 @@ public class BoardStateRequestHandler implements INotificationHandler{
 		
 		String[] arrOfArguments = message.split(":", 2);
 		
+		// extract userID from the first part of the message
 		String user = arrOfArguments[1];
 		String[] id = user.split("_", 2);
 		UserId userId = new UserId(new IpAddress(id[0]), new Username(id[1]));
@@ -56,7 +57,11 @@ public class BoardStateRequestHandler implements INotificationHandler{
 		try {
 			boardState = Serialize.serialize(ClientBoardState.maps);
 		} catch (IOException e) {
-			// log the exception
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"IOException occured while serializing BoardState on BoardServer"
+			);
 		}
 		
 		/**

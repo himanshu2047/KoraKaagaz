@@ -38,7 +38,10 @@ public class StopRequestHandler implements INotificationHandler {
 		 * As the client is closing it's application we need to remove it from 
 		 * the list of all the clients connected to this board.
 		 */
-		ClientBoardState.users.remove(new Username(message));
+		String[] id = message.split("_", 2);
+		IpAddress ipAddress = new IpAddress(id[0]);
+		Username username = new Username(id[1]);
+		ClientBoardState.users.remove(new UserId(ipAddress,username));
 		
 		/**
 		 * If after leaving this client user list becomes empty i.e no client is connected

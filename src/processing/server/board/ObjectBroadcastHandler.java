@@ -44,7 +44,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"BoardState class not found"
+					"BoardState class not found while deserializing BoardState"
+					+ " in Board State"
 			);
 			
 		} catch (IOException e) {
@@ -61,7 +62,17 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 		 * Handle all the processing related to the board object by calling the
 		 * static function of ObjectHandler
 		 */
-		ObjectHandler.handleBoardObject(message);
+		try {
+			ObjectHandler.handleBoardObject(message);
+		} catch (Exception e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"Error while handling received object on the Board Server"
+			);
+			
+		}
 		
 		// get the username of the user who created the object
 		UserId objectUser = obj.getUserId();

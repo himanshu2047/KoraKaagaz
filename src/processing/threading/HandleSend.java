@@ -66,7 +66,17 @@ public class HandleSend implements Runnable{
 		 * Call the networking module send function so now this
 		 * function will be run when the run is called of this class.
 		 */
-		ClientBoardState.communicator.send(address, message, identifier);
+		try {
+			ClientBoardState.communicator.send(address, message, identifier);
+		} catch(Exception e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"Error while sending a message over the network"
+			);
+			
+		}
 		
 	}
 	
