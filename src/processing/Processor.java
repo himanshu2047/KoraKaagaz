@@ -30,7 +30,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Null object given as argument for drawCurve from UI"
 			);
 			return;
@@ -58,7 +58,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Null object given as argument for erase from UI"
 			);
 			return;
@@ -84,7 +84,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "center object given as argument is null for drawCircle from UI"
 			);
 			return;
@@ -111,7 +111,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "start object given as argument is null for drawRectangle from UI"
 			);
 			return;
@@ -122,7 +122,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "end object given as argument is null for drawRectangle from UI"
 			);
 			return;
@@ -141,7 +141,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "start object given as argument is null for drawLine from UI"
 			);
 			return;
@@ -152,7 +152,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "end object given as argument is null for drawLine from UI"
 			);
 			return;
@@ -171,7 +171,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "one of the vertices given for drawing triangle is null from UI"
 			);
 			return;
@@ -196,9 +196,10 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "positions given as null argument for select function"
 			);
+			
 			return new ArrayList<Position>();
 		}
 		
@@ -217,7 +218,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Select Thread is interrupted while join select"
 			);
 		}
@@ -234,7 +235,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Select Thread is interrupted while join in Delete"
 			);
 		}
@@ -258,7 +259,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "intensity argument is given as null in colorChange"
 			);
 			return;
@@ -288,7 +289,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "angleCCW argument is given as null in rotate"
 			);
 			return;

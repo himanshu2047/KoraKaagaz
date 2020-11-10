@@ -25,7 +25,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Starting a new Board Server"
 		);
 		
@@ -52,7 +52,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Starting the communication on the Board Server"
 		);
 		
@@ -68,7 +68,7 @@ public class BoardServer {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Error while getting IP Address from network module in the BoardServer"
 			);
 		}
@@ -105,7 +105,7 @@ public class BoardServer {
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "BoardState class not found"
 				);
 				
@@ -114,7 +114,7 @@ public class BoardServer {
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "IO Exception occured while deserializing BoardState"
 				);
 				
@@ -130,7 +130,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Board Server subscribing for BoardState Request"
 		);
 		
@@ -148,7 +148,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Board Server subscribing for receiving BoardObject for broadcasting it"
 		);
 		
@@ -165,7 +165,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Board Server subscribing for Stop Connection Request from client"
 		);
 		
@@ -177,7 +177,7 @@ public class BoardServer {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully started new Board Server"
 		);
 	}

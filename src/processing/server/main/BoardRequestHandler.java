@@ -37,7 +37,7 @@ public class BoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Received a request to start a board server"
 		);
 		
@@ -77,7 +77,7 @@ public class BoardRequestHandler implements INotificationHandler{
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "IO EXception occured while starting a new board server"
 			);
 			
@@ -94,7 +94,7 @@ public class BoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "New Board Request received on the Main Server"
 		);
 		
@@ -139,7 +139,7 @@ public class BoardRequestHandler implements INotificationHandler{
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "IOException occured while loading the persistence for board"
 				);
 				
@@ -148,7 +148,7 @@ public class BoardRequestHandler implements INotificationHandler{
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "UnsupportedEncodingException occured while loading the persistence state"
 				);
 				
@@ -157,7 +157,7 @@ public class BoardRequestHandler implements INotificationHandler{
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "IO Exception occured while loading the persistence state"
 				);
 				
@@ -186,7 +186,7 @@ public class BoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent the port number of the server to the client"
 		);
 	}

@@ -58,7 +58,7 @@ public class Requests implements IRequests{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent the request for new board from client to the server"
 		);
 		
@@ -94,7 +94,7 @@ public class Requests implements IRequests{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent the request for existing board from client to the server"
 		);
 		

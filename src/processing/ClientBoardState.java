@@ -119,7 +119,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO,
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Subscribing for receiving Board objects from the server"
 		);
 		
@@ -138,7 +138,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Subscribing for receiving Board State after start of board server"
 		);
 		
@@ -157,7 +157,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Subscribing for receving Port number of the Board Server from the main server"
 		);
 		
@@ -173,7 +173,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Subscribing for receiving BoardID from the server"
 		);
 		
@@ -191,7 +191,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Making Board Request to the server"
 		);
 		
@@ -211,7 +211,7 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Waiting to receive boardID from the server"
 		);
 		

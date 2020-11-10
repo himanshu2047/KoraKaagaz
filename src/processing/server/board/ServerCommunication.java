@@ -70,7 +70,7 @@ public class ServerCommunication implements IServerCommunication{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent Board State request from client to server"
 		);
 	}
@@ -98,7 +98,7 @@ public class ServerCommunication implements IServerCommunication{
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "IO Exception occured during serializing the BoardObject"
 			);
 			
@@ -114,7 +114,7 @@ public class ServerCommunication implements IServerCommunication{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent the Board Object from client to the server"
 		);
 	}
@@ -141,7 +141,7 @@ public class ServerCommunication implements IServerCommunication{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Successfully sent the Stop Connection request from client to the server"
 		);
 	}

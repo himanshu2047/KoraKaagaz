@@ -41,7 +41,7 @@ public class HandleBoardObject implements Runnable{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Spawning a new thread to handle received BoardObject"
 		);
 		

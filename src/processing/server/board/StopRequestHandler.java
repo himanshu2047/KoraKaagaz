@@ -31,7 +31,7 @@ public class StopRequestHandler implements INotificationHandler {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				Thread.currentThread().getId()
+				"[#" + Thread.currentThread().getId() + "] "
 				+ "Received stop connection request from a client on the server"
 		);
 		
@@ -64,7 +64,7 @@ public class StopRequestHandler implements INotificationHandler {
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "IO Exception occured during serializing BoardState"
 				);
 				
@@ -80,7 +80,7 @@ public class StopRequestHandler implements INotificationHandler {
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "UnsupportedEncodingException occured while saving the persistence state"
 				);
 				
@@ -89,7 +89,7 @@ public class StopRequestHandler implements INotificationHandler {
 				ClientBoardState.logger.log(
 						ModuleID.PROCESSING, 
 						LogLevel.ERROR, 
-						Thread.currentThread().getId()
+						"[#" + Thread.currentThread().getId() + "] "
 						+ "IO Exception occured during saving the persistence state"
 				);
 				
@@ -98,7 +98,7 @@ public class StopRequestHandler implements INotificationHandler {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.SUCCESS, 
-					Thread.currentThread().getId()
+					"[#" + Thread.currentThread().getId() + "] "
 					+ "Successfully saved the persistence file in the local machine"
 			);
 			
