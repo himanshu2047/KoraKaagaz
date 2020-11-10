@@ -89,7 +89,7 @@ public class ClientBoardState {
 	 * boardDimension will store the dimensions of the canvas board defined
 	 * by the UI. This will be used while drawing shapes.
 	 */
-	public static Dimension boardDimension;
+	public static Dimension boardDimension = new Dimension(720,1100);
 	
 	/**
 	 * serverPort will store the port number of the Main Server which is kept
@@ -118,8 +118,9 @@ public class ClientBoardState {
 		 */
 		logger.log(
 				ModuleID.PROCESSING, 
-				LogLevel.INFO, 
-				"Subscribing for receiving Board objects from the server"
+				LogLevel.INFO,
+				Thread.currentThread().getId()
+				+ "Subscribing for receiving Board objects from the server"
 		);
 		
 		communicator.subscribeForNotifications(
@@ -137,7 +138,8 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Subscribing for receiving Board State after start of board server"
+				Thread.currentThread().getId()
+				+ "Subscribing for receiving Board State after start of board server"
 		);
 		
 		communicator.subscribeForNotifications(
@@ -155,7 +157,8 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Subscribing for receving Port number of the Board Server from the main server"
+				Thread.currentThread().getId()
+				+ "Subscribing for receving Port number of the Board Server from the main server"
 		);
 		
 		communicator.subscribeForNotifications(
@@ -170,7 +173,8 @@ public class ClientBoardState {
 		logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Subscribing for receiving BoardID from the server"
+				Thread.currentThread().getId()
+				+ "Subscribing for receiving BoardID from the server"
 		);
 		
 		communicator.subscribeForNotifications(
@@ -184,7 +188,13 @@ public class ClientBoardState {
 		 * Call the respective function defined in the interface IRequests in
 		 * processing.server.main package which is implemented in the class Requests.
 		 */
-		logger.log(ModuleID.PROCESSING, LogLevel.INFO, "Making Board Request to the server");
+		logger.log(
+				ModuleID.PROCESSING, 
+				LogLevel.INFO, 
+				Thread.currentThread().getId()
+				+ "Making Board Request to the server"
+		);
+		
 		IRequests request = new Requests();
 		if(boardId == null) {
 			request.requestForNewBoard(userIP, userPort);
@@ -198,7 +208,13 @@ public class ClientBoardState {
 		 * in IUser and it will be run in a thread in the processor class, so 
 		 * this while loop will not halt the process.
 		 */
-		logger.log(ModuleID.PROCESSING, LogLevel.INFO, "Waiting to receive boardID from the server");
+		logger.log(
+				ModuleID.PROCESSING, 
+				LogLevel.INFO, 
+				Thread.currentThread().getId()
+				+ "Waiting to receive boardID from the server"
+		);
+		
 		while(boardId == null) {
 			
 			// wait till BoardID is set by the server

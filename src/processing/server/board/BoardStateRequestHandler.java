@@ -32,7 +32,8 @@ public class BoardStateRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"BoardState request is made by the client"
+				Thread.currentThread().getId()
+				+ "BoardState request is made by the client"
 		);
 		
 		String[] arrOfArguments = message.split(":", 2);
@@ -60,7 +61,8 @@ public class BoardStateRequestHandler implements INotificationHandler{
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"IOException occured while serializing BoardState on BoardServer"
+					Thread.currentThread().getId()
+					+ "IOException occured while serializing BoardState on BoardServer"
 			);
 		}
 		
@@ -83,7 +85,8 @@ public class BoardStateRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				"Successfully sent the Board State to the client"
+				Thread.currentThread().getId()
+				+ "Successfully sent the Board State to the client"
 		);
 	}
 	

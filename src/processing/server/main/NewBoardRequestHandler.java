@@ -28,7 +28,8 @@ public class NewBoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Existing Board Server Request on the Main Server"
+				Thread.currentThread().getId()
+				+ "Existing Board Server Request on the Main Server"
 		);
 		
 		/**
@@ -63,7 +64,8 @@ public class NewBoardRequestHandler implements INotificationHandler{
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"Error while getting free port from the network module"
+					Thread.currentThread().getId()
+					+ "Error while getting free port from the network module"
 			);
 			
 		}
@@ -95,7 +97,8 @@ public class NewBoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				"Successfully sent the BoardID to the client"
+				Thread.currentThread().getId()
+				+ "Successfully sent the BoardID to the client"
 		);
 		
 		/**
@@ -111,7 +114,8 @@ public class NewBoardRequestHandler implements INotificationHandler{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				"Successfully sent the Port number of the server to the client"
+				Thread.currentThread().getId()
+				+ "Successfully sent the Port number of the server to the client"
 		);
 	}
 	

@@ -59,7 +59,8 @@ public class HandleSend implements Runnable{
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Spawning a new thread to send a message across the network"
+				Thread.currentThread().getId()
+				+ "Spawning a new thread to send a message across the network"
 		);
 		
 		/**
@@ -73,7 +74,8 @@ public class HandleSend implements Runnable{
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"Error while sending message over the network from Main Server"
+					Thread.currentThread().getId()
+					+ "Error while sending message over the network from Main Server"
 			);
 			
 		}

@@ -28,7 +28,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.INFO, 
-				"Received Board Object at the server for broadcasting"
+				Thread.currentThread().getId()
+				+ "Received Board Object at the server for broadcasting"
 		);
 		
 		BoardObject obj = null;
@@ -44,7 +45,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"BoardState class not found while deserializing BoardState"
+					Thread.currentThread().getId()
+					+ "BoardState class not found while deserializing BoardState"
 					+ " in Board State"
 			);
 			
@@ -53,7 +55,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"IO Exception occured while deserializing BoardState"
+					Thread.currentThread().getId()
+					+ "IO Exception occured while deserializing BoardState"
 			);
 			
 		}
@@ -69,7 +72,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
-					"Error while handling received object on the Board Server"
+					Thread.currentThread().getId()
+					+ "Error while handling received object on the Board Server"
 			);
 			
 		}
@@ -93,7 +97,8 @@ public class ObjectBroadcastHandler implements INotificationHandler {
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 
 				LogLevel.SUCCESS, 
-				"Successfully sent the received object to all the other clients"
+				Thread.currentThread().getId()
+				+ "Successfully sent the received object to all the other clients"
 		);
 	}
 	
