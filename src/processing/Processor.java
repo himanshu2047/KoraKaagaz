@@ -20,6 +20,8 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	protected Processor() {};
 	
+	Thread selectThread;
+	
 	@Override
 	public void drawCurve (ArrayList <Pixel> pixels) {
 		
@@ -100,38 +102,199 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public void drawRectangle(Pixel start, Pixel end) {
-		return;
+		
+		if (start == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"start object given as argument is null for drawRectangle from UI"
+			);
+			return;
+		}
+		
+		if (end == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"end object given as argument is null for drawRectangle from UI"
+			);
+			return;
+		}
+		
+		DrawRectangle runnable = new DrawRectangle(start.position, end.position, start.intensity);
+		Thread drawRectangle = new Thread(runnable);
+		drawRectangle.start();
 	}
 	
 	@Override
 	public void drawLine(Pixel start, Pixel end) {
-		return;
+		
+		if (start == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"start object given as argument is null for drawLine from UI"
+			);
+			return;
+		}
+		
+		if (end == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"end object given as argument is null for drawLine from UI"
+			);
+			return;
+		}
+		
+		DrawLine runnable = new DrawLine(start.position, end.position, start.intensity);
+		Thread drawLine = new Thread(runnable);
+		drawLine.start();
 	}
 	
 	@Override
 	public void drawTriangle(Pixel vertA, Pixel vertB, Pixel vertC) {
-		return;
+		
+		if(vertA == null || vertB == null || vertC == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"one of the vertices given for drawing triangle is null from UI"
+			);
+			return;
+		}
+		
+		DrawTriangle runnable = new DrawTriangle(
+				vertA.position, 
+				vertB.position, 
+				vertC.position, 
+				vertA.intensity
+		);
+		
+		Thread drawTriangle = new Thread(runnable);
+		drawTriangle.start();
 	}
 	
 	@Override
 	public ArrayList<Position> select (ArrayList <Position> positions) {
-		ArrayList<Position> selectedPixels = new ArrayList<Position>();
-		return selectedPixels;
+		
+		if (positions == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"positions given as null argument for select function"
+			);
+			return new ArrayList<Position>();
+		}
+		
+		Select runnable = new Select(positions);
+		selectThread = new Thread(runnable);
+		selectThread.start();
+		
+		/**
+		 * waiting for the select thread to complete as we need to return the
+		 * selected pixels back to the UI.
+		 */
+		try {
+			selectThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"Select Thread is interrupted while join select"
+			);
+		}
+		return runnable.getSelectedObjectPositions();
 	}
 	
 	@Override
 	public void delete() {
-		return;
+		
+		try {
+			selectThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"Select Thread is interrupted while join in Delete"
+			);
+		}
+		
+		BoardObject objectToDelete = ClientBoardState
+				.maps
+				.getBoardObjectFromId(
+						ClientBoardState.getSelectedObject().objectId
+				);
+		
+		Delete runnable = new Delete(objectToDelete, ClientBoardState.userId);
+		Thread deleteThread = new Thread(runnable);
+		deleteThread.start();
 	}
 	
 	@Override
 	public void colorChange (Intensity intensity) {
-		return;
+		
+		if (intensity == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"intensity argument is given as null in colorChange"
+			);
+			return;
+		}
+		
+		BoardObject selectedObject = ClientBoardState
+				.maps
+				.getBoardObjectFromId(
+						ClientBoardState.getSelectedObject().objectId
+				);
+		
+		ColorChange runnable = new ColorChange(
+				selectedObject, 
+				ClientBoardState.userId, 
+				intensity
+		);
+		
+		Thread colorChangeThread = new Thread(runnable);
+		colorChangeThread.start();
 	}
 	
 	@Override
 	public void rotate (Angle angleCCW) {
-		return;
+		
+		if (angleCCW == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"angleCCW argument is given as null in rotate"
+			);
+			return;
+		}
+		
+		BoardObject selectedObject = ClientBoardState
+				.maps
+				.getBoardObjectFromId(
+						ClientBoardState.getSelectedObject().objectId
+				);
+		
+		Rotate runnable = new Rotate(
+				selectedObject, 
+				ClientBoardState.userId, 
+				angleCCW
+		);
+		
+		Thread rotateThread = new Thread(runnable);
+		rotateThread.start();
 	}
 	
 	@Override
@@ -141,12 +304,18 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public void undo() {
-		return;
+		
+		Undo runnable = new Undo();
+		Thread undoThread = new Thread(runnable);
+		undoThread.start();
 	}
 	
 	@Override
 	public void redo() {
-		return;
+		
+		Redo runnable = new Redo();
+		Thread redoThread = new Thread(runnable);
+		redoThread.start();
 	}
 	
 	@Override
