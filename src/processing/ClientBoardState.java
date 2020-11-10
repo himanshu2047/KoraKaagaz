@@ -245,4 +245,19 @@ public class ClientBoardState {
 		
 	}
 	
+	
+	/**
+	 * When in start client will receive the board State from the server as the persistence,
+	 * then we need to pass the changes of the earlier objects to the UI. 
+	 * 
+	 * So after receiving the board State, it's handler will call this function.
+	 */
+	public static void sendBoardState() {
+		
+		CommunicateChange.identifierToHandler
+			.get(CommunicateChange.identifierUI)
+			.giveSelectedPixels(maps.getPixelsAtTop(maps.getPositions()));
+		
+	}
+	
 }
