@@ -365,6 +365,10 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 		GiveUserDetails runnable = new GiveUserDetails(userName, ipAddress, boardId);
 		Thread giveDetailsThread = new Thread(runnable);
 		giveDetailsThread.start();
+		
+		giveDetailsThread.join();
+		
+		return ClientBoardState.boardId.toString();
 	}
 	
 	@Override
@@ -383,6 +387,10 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 		GetUser runnable = new GetUser(positions);
 		Thread getUserThread = new Thread(runnable);
 		getUserThread.start();
+		
+		getUserThread.join();
+		
+		return runnable.getUsername();
 	}
 	
 	@Override
