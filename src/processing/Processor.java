@@ -265,6 +265,18 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			return;
 		}
 		
+		try {
+			selectThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "Select Thread is interrupted while join in Color Change"
+			);
+		}
+		
 		BoardObject selectedObject = ClientBoardState
 				.maps
 				.getBoardObjectFromId(
@@ -295,6 +307,18 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			return;
 		}
 		
+		try {
+			selectThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "Select Thread is interrupted while join in rotate"
+			);
+		}
+		
 		BoardObject selectedObject = ClientBoardState
 				.maps
 				.getBoardObjectFromId(
@@ -313,7 +337,10 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public void reset () {
-		return;
+		
+		processing.threading.Reset runnable = new processing.threading.Reset(ClientBoardState.userId, true);
+		Thread resetThread = new Thread(runnable);
+		resetThread.start();
 	}
 	
 	@Override
@@ -334,23 +361,53 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public String giveUserDetails(String userName, String ipAddress, String boardId) {
-		String userId = new String();
-		return userId;
+		
+		GiveUserDetails runnable = new GiveUserDetails(userName, ipAddress, boardId);
+		Thread giveDetailsThread = new Thread(runnable);
+		giveDetailsThread.start();
 	}
 	
 	@Override
 	public String getUser(ArrayList<Position> positions) {
-		String userId = new String();
-		return userId;
+		
+		if (positions == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "positions given as argument in getUser function is null"
+			);
+		}
+		
+		GetUser runnable = new GetUser(positions);
+		Thread getUserThread = new Thread(runnable);
+		getUserThread.start();
 	}
 	
 	@Override
 	public void stopBoardSession() {
-		return;
+		
+		StopBoardSession runnable = new StopBoardSession();
+		Thread stopSessionThread = new Thread(runnable);
+		stopSessionThread.start();
 	}
 	
 	@Override
 	public void subscribeForChanges(String identifier, IChanges handler) {
-		return;
+		
+		if (handler == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "handler given as argument while subscribing is null"
+			);
+		}
+		
+		SubscribeForChanges runnable = new SubscribeForChanges(identifier, handler);
+		Thread subscribeThread = new Thread(runnable);
+		subscribeThread.start();
 	}
 }

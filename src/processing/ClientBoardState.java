@@ -13,6 +13,7 @@ import infrastructure.validation.logger.*;
 * This class contains all the info of the current board.
 *
 * @author Himanshu Jain
+* @reviewer Ahmed Zaheer Dadarkar
 */
 
 public class ClientBoardState {

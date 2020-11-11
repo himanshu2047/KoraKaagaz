@@ -21,7 +21,7 @@ public class UserId {
 	 * @param timestamp Time at which this object was built
 	 */
 	public UserId(IpAddress ipAddress, Username username) {
-		userId = ipAddress + "_" + username.toString();
+		userId = ipAddress.toString() + "_" + username.toString();
 	}
 	
 	/** Copy Constructor */
