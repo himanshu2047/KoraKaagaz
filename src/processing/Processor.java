@@ -366,7 +366,17 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 		Thread giveDetailsThread = new Thread(runnable);
 		giveDetailsThread.start();
 		
-		giveDetailsThread.join();
+		try {
+			giveDetailsThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "giveDetails Thread is interrupted while join"
+			);
+		}
 		
 		return ClientBoardState.boardId.toString();
 	}
@@ -388,7 +398,17 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 		Thread getUserThread = new Thread(runnable);
 		getUserThread.start();
 		
-		getUserThread.join();
+		try {
+			getUserThread.join();
+		} catch (InterruptedException e) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "getUser Thread is interrupted while join"
+			);
+		};
 		
 		return runnable.getUsername();
 	}
