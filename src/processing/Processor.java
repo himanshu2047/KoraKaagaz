@@ -189,7 +189,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	}
 	
 	@Override
-	public ArrayList<Position> select (ArrayList <Position> positions) {
+	public ArrayList<Pixel> select (ArrayList <Position> positions) {
 		
 		if (positions == null) {
 			
@@ -200,7 +200,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 					+ "positions given as null argument for select function"
 			);
 			
-			return new ArrayList<Position>();
+			return new ArrayList<Pixel>();
 		}
 		
 		Select runnable = new Select(positions);
@@ -222,7 +222,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 					+ "Select Thread is interrupted while join select"
 			);
 		}
-		return runnable.getSelectedObjectPositions();
+		return runnable.getSelectedObjectPixels();
 	}
 	
 	@Override
