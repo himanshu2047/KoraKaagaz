@@ -100,7 +100,22 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public void drawSquare(Pixel start, float length) {
-		return;
+		
+		if (start == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "start object given as argument is null for drawSquare from UI"
+			);
+			return;
+		}
+		
+		DrawSquare runnable = new DrawSquare(start, length);
+		Thread drawSquareThread = new Thread(runnable);
+		drawSquareThread.start();
+		
 	}
 	
 	@Override
