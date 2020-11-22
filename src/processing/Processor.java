@@ -100,7 +100,22 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	
 	@Override
 	public void drawSquare(Pixel start, float length) {
-		return;
+		
+		if (start == null) {
+			
+			ClientBoardState.logger.log(
+					ModuleID.PROCESSING, 
+					LogLevel.ERROR, 
+					"[#" + Thread.currentThread().getId() + "] "
+					+ "start object given as argument is null for drawSquare from UI"
+			);
+			return;
+		}
+		
+		DrawSquare runnable = new DrawSquare(start, length);
+		Thread drawSquareThread = new Thread(runnable);
+		drawSquareThread.start();
+		
 	}
 	
 	@Override
@@ -189,7 +204,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	}
 	
 	@Override
-	public ArrayList<Position> select (ArrayList <Position> positions) {
+	public ArrayList<Pixel> select (ArrayList <Position> positions) {
 		
 		if (positions == null) {
 			
@@ -200,7 +215,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 					+ "positions given as null argument for select function"
 			);
 			
-			return new ArrayList<Position>();
+			return new ArrayList<Pixel>();
 		}
 		
 		Select runnable = new Select(positions);
@@ -222,7 +237,7 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 					+ "Select Thread is interrupted while join select"
 			);
 		}
-		return runnable.getSelectedObjectPositions();
+		return runnable.getSelectedObjectPixels();
 	}
 	
 	@Override
@@ -362,7 +377,9 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 	@Override
 	public String giveUserDetails(String userName, String ipAddress, String boardId) {
 		
-		GiveUserDetails runnable = new GiveUserDetails(userName, ipAddress, boardId);
+		String ipWithoutPort = ipAddress.split(":")[0];
+		
+		GiveUserDetails runnable = new GiveUserDetails(userName, ipWithoutPort, boardId);
 		Thread giveDetailsThread = new Thread(runnable);
 		giveDetailsThread.start();
 		
