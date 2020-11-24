@@ -8,6 +8,7 @@ import infrastructure.validation.logger.LogLevel;
 import infrastructure.validation.logger.ModuleID;
 import networking.CommunicatorFactory;
 import processing.*;
+import infrastructure.content.ContentFactory;
 import processing.utility.*;
 
 /**
@@ -182,6 +183,9 @@ public class BoardServer {
 				"StopConnection", 
 				new StopRequestHandler()
 		);
+		
+		// start the content module server
+		ContentFactory.startContentServer();
 		
 		ClientBoardState.logger.log(
 				ModuleID.PROCESSING, 

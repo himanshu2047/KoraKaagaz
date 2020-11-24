@@ -72,15 +72,14 @@ public class BoardRequestHandler implements INotificationHandler{
 			
 			processBuilder.start();
 			
-		} catch(IOException e) {
+		} catch(Exception e) {
 			
 			ClientBoardState.logger.log(
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
 					"[#" + Thread.currentThread().getId() + "] "
-					+ "IO EXception occured while starting a new board server"
+					+ "EXception occured while starting a new board server"
 			);
-			
 		}
 	}
 	
