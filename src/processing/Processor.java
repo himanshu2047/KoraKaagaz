@@ -36,6 +36,10 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			return;
 		}
 		
+		for(Pixel pixel: pixels) {
+			System.out.println(pixel.position.r + " " + pixel.position.c);
+		}
+		
 		IBoardObjectOperation boardOp = new CreateOperation();
 		Timestamp time = Timestamp.getCurrentTime();
 		ObjectId objectId = new ObjectId(ClientBoardState.userId, time);
@@ -219,6 +223,12 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			);
 			
 			return new ArrayList<Pixel>();
+		}
+		
+		System.out.println(positions.size());
+		
+		for(Position pos: positions) {
+			System.out.println(pos.r + " " + pos.c);
 		}
 		
 		Select runnable = new Select(positions);

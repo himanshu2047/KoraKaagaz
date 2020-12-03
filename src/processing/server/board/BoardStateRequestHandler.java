@@ -62,7 +62,7 @@ public class BoardStateRequestHandler implements INotificationHandler{
 					ModuleID.PROCESSING, 
 					LogLevel.ERROR, 
 					"[#" + Thread.currentThread().getId() + "] "
-					+ "IOException occured while serializing BoardState on BoardServer"
+					+ "IOException occured while serializing BoardState on BoardServer " + e.toString()
 			);
 		}
 		

@@ -103,7 +103,7 @@ public class Shapes {
 		g.setStroke(color);
 		g.strokeOval(topx, topy, diameter, diameter);
 		Position start = new Position((int) (topx+(diameter/2)),(int) (topy+(diameter/2)));
-		Intensity i = new Intensity((int) color.getRed()*255,(int) color.getGreen()*255,(int) color.getBlue()*255);
+		Intensity i = new Intensity((int) color.getRed(),(int) color.getGreen(),(int) color.getBlue());
 		Pixel p1 = new Pixel(start,i);
 		drawshape.drawCircle(p1,(float) diameter/2);
 		logger.log(
@@ -135,7 +135,7 @@ public class Shapes {
 		g.strokeLine(startx, starty, endx, endy);
 		Position start = new Position((int) startx,(int) starty);
 		Position end = new Position((int) endx,(int) endy);
-		Intensity i = new Intensity((int) color.getRed()*255,(int) color.getGreen()*255,(int) color.getBlue()*255);
+		Intensity i = new Intensity((int) color.getRed(),(int) color.getGreen(),(int) color.getBlue());
 		Pixel p1 = new Pixel(start,i);
 		Pixel p2 = new Pixel(end,i);
 		drawshape.drawLine(p1, p2);

@@ -45,6 +45,9 @@ public class Undo implements Runnable {
             }
         }
         catch (Exception e) {
+        	
+        	System.out.println(e.toString());
+        	
             Helper.log(
                 logger,
                 LogLevel.ERROR,
