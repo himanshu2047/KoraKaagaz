@@ -1,4 +1,4 @@
-false<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <logging>
     <testMode filePath="resources/testing_logger.xml">true</testMode>
     <loggerOptions>
