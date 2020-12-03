@@ -173,6 +173,9 @@ public class Processor implements IDrawErase, IDrawShapes, IOperation, IUndoRedo
 			return;
 		}
 		
+		System.out.println(start.position.r + " " + start.position.c);
+		System.out.println(end.position.r + " " + end.position.c);
+		
 		DrawLine runnable = new DrawLine(start.position, end.position, start.intensity);
 		Thread drawLine = new Thread(runnable);
 		drawLine.start();
