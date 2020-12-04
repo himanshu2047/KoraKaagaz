@@ -141,6 +141,17 @@ public class UserUtil {
   		IServerCommunication serverComm = new ServerCommunication();
     		// Informs the server about closing the session of the user
     		serverComm.stopConnection();
+    		
+    		try {
+    			Thread.sleep(5000);
+    		} catch(Exception e) {
+    			logger.log(
+        				ModuleID.PROCESSING, 
+        				LogLevel.ERROR, 
+        				"[#" + Thread.currentThread().getId() + "] "
+        				+ "Error Occurred while trying to sleep in stopSession"
+        		);
+    		}
     	
     		// stops the communicator (all its threads)
     		ClientBoardState.communicator.stop();

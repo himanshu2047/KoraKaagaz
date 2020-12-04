@@ -41,6 +41,12 @@ public class BoardRequestHandler implements INotificationHandler{
 				+ "Received a request to start a board server"
 		);
 		
+		if(port == null) {
+			System.out.println("Port is null");
+		} else if(boardId == null) { 
+			System.out.println("BoardID is null");
+		}
+		
 		/**
 		 * creating an object of ProcessBuilder which is used to run the operating 
 		 * system commands. It will be used to run the Board Server's jar file of the 
@@ -80,6 +86,8 @@ public class BoardRequestHandler implements INotificationHandler{
 					"[#" + Thread.currentThread().getId() + "] "
 					+ "EXception occured while starting a new board server"
 			);
+			
+			e.printStackTrace();
 		}
 	}
 	
@@ -130,38 +138,38 @@ public class BoardRequestHandler implements INotificationHandler{
 			 * so we need to load them and pass as the argument while starting the Board
 			 * server
 			 */
-			String persistence = null;
+			String persistence = "LoadPersistence";
 			
-			try {
-				persistence = PersistanceSupport.loadStateString(boardId);
-			} catch (ClassNotFoundException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "IOException occured while loading the persistence for board"
-				);
-				
-			} catch(UnsupportedEncodingException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "UnsupportedEncodingException occured while loading the persistence state"
-				);
-				
-			} catch (IOException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "IO Exception occured while loading the persistence state"
-				);
-				
-			}
+//			try {
+//				persistence = PersistanceSupport.loadStateString(boardId);
+//			} catch (ClassNotFoundException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "IOException occured while loading the persistence for board"
+//				);
+//				
+//			} catch(UnsupportedEncodingException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "UnsupportedEncodingException occured while loading the persistence state"
+//				);
+//				
+//			} catch (IOException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "IO Exception occured while loading the persistence state"
+//				);
+//				
+//			}
 			
 			// starting the Board Server
 			startBoardServer(boardServerPort, boardId, persistence);
