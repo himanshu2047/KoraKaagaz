@@ -138,41 +138,55 @@ public class BoardRequestHandler implements INotificationHandler{
 			 * so we need to load them and pass as the argument while starting the Board
 			 * server
 			 */
-			String persistence = null;
+			String persistence = "Persistence";
 			
-			try {
-				persistence = PersistanceSupport.loadStateString(boardId);
-			} catch (ClassNotFoundException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "IOException occured while loading the persistence for board"
-				);
-				
-			} catch(UnsupportedEncodingException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "UnsupportedEncodingException occured while loading the persistence state"
-				);
-				
-			} catch (IOException e) {
-				
-				ClientBoardState.logger.log(
-						ModuleID.PROCESSING, 
-						LogLevel.ERROR, 
-						"[#" + Thread.currentThread().getId() + "] "
-						+ "IO Exception occured while loading the persistence state"
-				);
-				
-			}
+//			try {
+//				persistence = PersistanceSupport.loadStateString(boardId);
+//			} catch (ClassNotFoundException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "IOException occured while loading the persistence for board"
+//				);
+//				
+//			} catch(UnsupportedEncodingException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "UnsupportedEncodingException occured while loading the persistence state"
+//				);
+//				
+//			} catch (IOException e) {
+//				
+//				ClientBoardState.logger.log(
+//						ModuleID.PROCESSING, 
+//						LogLevel.ERROR, 
+//						"[#" + Thread.currentThread().getId() + "] "
+//						+ "IO Exception occured while loading the persistence state"
+//				);
+//				
+//			}
 			
 			// starting the Board Server
 			startBoardServer(boardServerPort, boardId, persistence);
+			
+			// waiting for the Board Server to start
+			try {
+				Thread.sleep(5000);
+			} catch(Exception e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "Error while sleep in the current thread"
+				);
+				
+			}
 			
 			/**
 			 * We need to store the port number on which this board server is running 

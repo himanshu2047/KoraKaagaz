@@ -107,6 +107,37 @@ public class BoardServer {
 		if(!persistence.equals("NoPersistence")) {
 			
 			try {
+				persistence = PersistanceSupport.loadStateString(ClientBoardState.boardId);
+			} catch (ClassNotFoundException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "IOException occured while loading the persistence for board"
+				);
+				
+			} catch(UnsupportedEncodingException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "UnsupportedEncodingException occured while loading the persistence state"
+				);
+				
+			} catch (IOException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "IO Exception occured while loading the persistence state"
+				);
+				
+			}
+			
+			try {
 				/**
 				 * Deserialize the persistence string and cast it the BoardState
 				 * and save this old persistence state in the maps of ClientBoardState.
