@@ -211,10 +211,18 @@ public class UndoRedo {
                        );
             return null;
         }
+<<<<<<< HEAD
     	
         // Gets the top object from the stack
         BoardObject topObj =  curStack.get(curStack.size() - 1);
     	
+=======
+    	
+        // Gets the top object from the stack
+        BoardObject topObj =  curStack.get(curStack.size() - 1);
+        // object not to be pushed during the operation
+        curObjId = topObj.getObjectId();
+>>>>>>> 4226e9c69fd8e8d220d5cd188d979768cfea3fed
         // Gets the operation performed on that object
         BoardObjectOperationType operationType = topObj.getOperation().getOperationType();
         // Object to be returned for sending over the network
@@ -268,8 +276,23 @@ public class UndoRedo {
                 newObj = rotateOperation(topObj, newAngle);
             }
             else {
+<<<<<<< HEAD
                 retObj = topObj;
                 newObj = topObj;
+=======
+                newObj = topObj;
+
+                // object similar to its previous version (undo version)
+                BoardObject prevObj = duplicateObject(topObj, topObj.getOperation());
+                prevObj.setPixels(prevObj.getPrevIntensity());
+                prevObj.setPrevIntensity(topObj.getPixels());
+                
+                // remove previous object
+                ClientBoardState.maps.removeObjectFromMaps(prevObj.getObjectId());
+
+                // return object same as previous object
+                retObj = prevObj;
+>>>>>>> 4226e9c69fd8e8d220d5cd188d979768cfea3fed
                 // update the maps
                 ClientBoardState.maps.insertObjectIntoMaps(newObj);
             }
@@ -292,8 +315,23 @@ public class UndoRedo {
                 newObj = colorChangeOperation(topObj, newIntensity);
             }
             else {
+<<<<<<< HEAD
                 retObj = topObj;
                 newObj = topObj;
+=======
+                newObj = topObj;
+
+                // object similar to its previous version (undo version)
+                BoardObject prevObj = duplicateObject(topObj, topObj.getOperation());
+                prevObj.setPixels(prevObj.getPrevIntensity());
+                prevObj.setPrevIntensity(topObj.getPixels());
+                
+                // remove previous object
+                ClientBoardState.maps.removeObjectFromMaps(prevObj.getObjectId());
+
+                // return object same as previous object
+                retObj = prevObj;
+>>>>>>> 4226e9c69fd8e8d220d5cd188d979768cfea3fed
                 // update the maps
                 ClientBoardState.maps.insertObjectIntoMaps(newObj);
             }
@@ -312,6 +350,12 @@ public class UndoRedo {
         // Transfers the object from one stack to other
         addIntoStack(otherStack, topObj);
         curStack.remove(curStack.size() - 1);
+<<<<<<< HEAD
+=======
+
+        // undo-redo is done, the object can be pushed into stack
+        curObjId = null;
+>>>>>>> 4226e9c69fd8e8d220d5cd188d979768cfea3fed
         /** 
          *  Send the modified pixels to the UI 
          *  null value occurs when delete operation is performed 
