@@ -1,6 +1,7 @@
 package processing.server.board;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import processing.boardobject.*;
@@ -45,6 +46,9 @@ public class BoardServer {
 		 * extracting that.
 		 */
 		Port serverPort = new Port(Integer.parseInt(args[0]));
+		
+		// just to initialise the type of communicator, no use here
+		CommunicatorFactory.getClientInfo().getIp();
 		
 		/**
 		 * Get a new communicator from the networking module giving the same port
@@ -100,7 +104,40 @@ public class BoardServer {
 		 * If the board never existed before i.e the board is a new board then the persistence 
 		 * will be null, so we need not to do anything.
 		 */
-		if(persistence != null) {
+		if(!persistence.equals("NoPersistence")) {
+			
+			try {
+				persistence = PersistanceSupport.loadStateString(
+						ClientBoardState.boardId
+				);
+			} catch (ClassNotFoundException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "IOException occured while loading the persistence for board"
+				);
+				
+			} catch(UnsupportedEncodingException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "UnsupportedEncodingException occured while loading the persistence state"
+				);
+				
+			} catch (IOException e) {
+				
+				ClientBoardState.logger.log(
+						ModuleID.PROCESSING, 
+						LogLevel.ERROR, 
+						"[#" + Thread.currentThread().getId() + "] "
+						+ "IO Exception occured while loading the persistence state"
+				);
+				
+			}
 			
 			try {
 				/**
