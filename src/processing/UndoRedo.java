@@ -199,7 +199,6 @@ public class UndoRedo {
 			ArrayList <BoardObject> otherStack,
 			Operation operation
 	) {
-		System.out.println("************");
 
 		// No undo or redo operation possible
     	if (curStack.size() <= 0) {
@@ -310,8 +309,6 @@ public class UndoRedo {
     		addIntoStack(otherStack, newObj);
     	else 
     		addIntoStack(otherStack, topObj);
-    	System.out.println("Stack size : " + otherStack.size());
-    	System.out.println("Curr size : " + curStack.size());
 
     	curStack.remove(curStack.size() - 1);
     	/** 
@@ -399,15 +396,12 @@ public class UndoRedo {
 	 */
 	public static void pushIntoStack(BoardObject object) {
 		
-		System.out.println("************" + object.getOperation());
-
 		//If the object is created by other user then do not push it into the stack
 		if (object.getUserId().equals(ClientBoardState.userId) == false) {
 			return;
 		}
 		if(currentObj!=null && currentObj.equals(object.getObjectId()))
 			return;
-		System.out.println("************" + object.getOperation());
 		// pushes into undo stack
 		addIntoStack(ClientBoardState.undoStack, object);
 		
