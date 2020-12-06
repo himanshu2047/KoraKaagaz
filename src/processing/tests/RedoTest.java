@@ -99,7 +99,7 @@ public class RedoTest  extends TestCase {
 		);
 		
 		/* get an instance of IDrawErase interface */
-		IDrawErase draw = ProcessingFactory.getProcessor();
+		Processor draw = ProcessingFactory.getProcessor();
 		
 		/* get an instance of IUndoRedo interface */
 		IUndoRedo undoRedo = ProcessingFactory.getProcessor();
@@ -121,7 +121,7 @@ public class RedoTest  extends TestCase {
 			return false;
 		
 		}
-				
+			
 		/* wait till UI receives the output */
 		while (ChangesHandler.receivedOutput == null) {
 			try{
@@ -132,11 +132,11 @@ public class RedoTest  extends TestCase {
 		}
 		
 		ChangesHandler.receivedOutput = null;
-
+		
 		try {
-			/* pass the input array for drawing ObjectB to processor module */
-			draw.drawCurve(objectB);
-
+			/* call processing select */
+			draw.select(selectObjectPosition);
+			
 		} catch (Exception error) {
 			/* return and set error in case of unsuccessful processing */
 			this.setError(error.toString());
@@ -144,7 +144,28 @@ public class RedoTest  extends TestCase {
 			return false;
 		
 		}
-				
+		
+		/* wait till UI receives the output */
+		while (ChangesHandler.receivedOutput == null) {
+			try{
+				Thread.sleep(50);
+			 } catch (Exception e) {
+				 // wait until output received
+			 }
+		}
+		ChangesHandler.receivedOutput = null;
+		
+		Angle rotateBy = new Angle(90);
+		/* Call colorChange API of processing module */
+		try {
+			draw.rotate(rotateBy);
+		} catch (Exception error) {
+			/* return and set error in case of unsuccessful processing */
+			this.setError(error.toString());
+			ChangesHandler.receivedOutput = null;
+			return false;
+		}
+		
 		/* wait till UI receives the output */
 		while (ChangesHandler.receivedOutput == null) {
 			try{
@@ -155,7 +176,7 @@ public class RedoTest  extends TestCase {
 		}
 		
 		ChangesHandler.receivedOutput = null;
-		
+
 		/* Call undo API of processing module */
 		try {
 			undoRedo.undo();
@@ -203,6 +224,10 @@ public class RedoTest  extends TestCase {
 		Set<Pixel> outputSet = new HashSet<Pixel>();
 		outputSet.addAll(ChangesHandler.receivedOutput);
 		
+		for(Pixel p: ChangesHandler.receivedOutput) {
+			System.out.println(p.position.r + " " + p.position.c);
+			System.out.println(p.intensity.r + " " + p.intensity.g + " " + p.intensity.b);
+		}
 		/* check whether the output received is same as expected output */
 		if (inputSet.equals(outputSet)) {
 			logger.log(
